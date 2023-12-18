@@ -1,0 +1,17 @@
+.social-links a{
+    text-decoration: none;
+    color: #706F6F;
+}
+
+.right-banner img{
+    position: absolute;
+
+}
+
+.right-banner-text{
+    position: relative;
+    text-align: center;
+    color: white;
+    width: 150px;
+    margin-left: 70px;
+}
