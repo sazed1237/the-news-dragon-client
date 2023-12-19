@@ -2,10 +2,14 @@ import React from 'react';
 import './Header.css'
 import logo from '../../../assets/logo.png';
 import moment from 'moment';
-import { Button, Container, Nav, NavDropdown, Navbar } from 'react-bootstrap';
+import { Button, Container, } from 'react-bootstrap';
 import Marquee from "react-fast-marquee";
 
+import NavigationBar from '../NavigationBar/NavigationBar';
+
+
 const Header = () => {
+
     return (
         <Container>
             <div className="text-center mt-3">
@@ -28,27 +32,6 @@ const Header = () => {
                     </Marquee>
                 </div>
             </div>
-
-
-            {/* Navbar */}
-            <Navbar collapseOnSelect expand="lg" >
-                <Container>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="m-auto ">
-                            <Nav.Link href="/">Home</Nav.Link>
-                            <Nav.Link href="/about">About</Nav.Link>
-                            <Nav.Link href="/career">Career</Nav.Link>
-                        </Nav>
-                        <Nav>
-                            <Nav.Link href="#deets">Profile</Nav.Link>
-                            <Nav.Link eventKey={2} href="#memes">
-                                <Button className='rounded-0 px-5' variant="dark">Login</Button>
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
 
         </Container>
     );
