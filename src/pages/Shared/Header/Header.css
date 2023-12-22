@@ -1,28 +1,18 @@
 .highlights {
-    height: 80px;
+    height: 50px;
     background-color: #F3F3F3;
     font-weight: 600;
     align-items: center;
     display: flex;
 }
 
-.highlights .latest {
-    border-radius: 0;
+.latest {
+    height: 30px;
+    /* margin-top: 15px; */
     margin-left: 16px;
-    width: 110px;
-    height: 48px;
-    background-color: #D72050;;
-}
-
-.highlights Marquee {
-    color: #403F3F;
-
-}
-.highlights .see-more{
+    width: 100px;
+    text-align: center;
     background-color: #D72050;
-    border-radius: 0;
-    border: none;
-    margin-right: 15px;
-    color: #F3F3F3;
-
+    color: #fff;
 }
+

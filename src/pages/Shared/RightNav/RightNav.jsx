@@ -1,17 +1,53 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './RightNav.css'
 import { Button, Container, ListGroup } from 'react-bootstrap';
 import { FaFacebook, FaGithub, FaGoogle, FaInstagram, FaTwitter } from 'react-icons/fa';
 import QZone from '../QZone/QZone';
 import bg from '../../../assets/bg.png';
+import { AuthContext } from '../../../provider/AuthProvider';
 
 const RightNav = () => {
+
+
+    const {singInWithGoogle, singInWithGitHub} = useContext(AuthContext)
+
+    // sing in with google
+    const handleGoogleSingIn = () =>{
+        singInWithGoogle()
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser);
+            alert('Your Successfully Login')
+        })
+        .catch(error =>{
+            console.log(error)
+            alert(error.message)
+
+        })
+    }
+
+    // GitHub sing in
+    const handleGitHubSingIn =() =>{
+        singInWithGitHub()
+        .then(result =>{
+            const loggedUser = result.user;
+            console.log(loggedUser)
+            alert('Your Successfully Login')
+        })
+        .catch(error =>{
+            console.log(error.message)
+            alert(error.message)
+        })
+    }
+
+
+
     return (
         <div>
             <div className="social-login">
                 <h4 className='mb-3'>Login With</h4>
-                <Button className='mb-2 px-5' variant="outline-secondary"> <FaGithub /> Login with Github</Button>
-                <Button className='mb-2 px-5' variant="outline-primary"> <FaGoogle /> Login with Google</Button>
+                <Button onClick={handleGitHubSingIn} className='mb-2 px-5' variant="outline-secondary"> <FaGithub /> Login with Github</Button>
+                <Button onClick={handleGoogleSingIn} className='mb-2 px-5' variant="outline-primary"> <FaGoogle /> Login with Google</Button>
             </div>
 
             <div className="social-links mt-4 ">

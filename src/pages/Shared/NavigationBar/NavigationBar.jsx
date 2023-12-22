@@ -9,13 +9,13 @@ const NavigationBar = () => {
     const { user, logOut } = useContext(AuthContext);
 
 
-    const handleLogOut = () =>{
+    const handleLogOut = () => {
         logOut()
-        .then(()=>{
-        })
-        .catch(error =>{
-            console.log(error)
-        })
+            .then(() => {
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
 
@@ -32,14 +32,15 @@ const NavigationBar = () => {
                             <Link className='text-secondary text-decoration-none ps-3' to={"/career"}>Career</Link>
                         </Nav>
                         <Nav>
-
+                            {/* dynamic user photo */}
                             {user &&
-                                <FaUserCircle style={{ fontSize: '2rem' }}></FaUserCircle>
+                                // <FaUserCircle style={{ fontSize: '2rem' }}></FaUserCircle>
+                                <img style={{ width: "50px", height: "50px", borderRadius: "50%", marginRight: "10px" }} src={user.photoURL} alt="" />
 
                             }
 
                             {user ?
-                                <Button onClick={handleLogOut} className='rounded-0 px-5' variant="dark">Log Out</Button>
+                                <Button onClick={handleLogOut} className='rounded-0 px-5 ' variant="dark">Log Out</Button>
                                 :
                                 <Link to={'/login'}>
                                     <Button className='rounded-0 px-5' variant="dark">Login</Button>

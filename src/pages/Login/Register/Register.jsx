@@ -2,36 +2,77 @@ import React, { useContext, useState } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../provider/AuthProvider';
+import { updateProfile } from 'firebase/auth';
 
 const Register = () => {
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
 
-    const { createUser } = useContext(AuthContext)
+    const { createUser, userProfile } = useContext(AuthContext)
     const navigate = useNavigate()
-    const [accepted, setAccepted ] = useState(false)
+    const [accepted, setAccepted] = useState(false)
+
 
     const handleRegister = event => {
+        // 1. prevent page refresh
         event.preventDefault();
+        setSuccess('')
+        setError('')
+        // 2. get form data
         const form = event.target;
-        const displayName = form.name.value;
-        const photoURL = form.photo.value;
+        const name = form.name.value;
+        const photo = form.photo.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(displayName, photoURL, email, password)
+        console.log(name, photo, email, password)
 
+        // 3. validate Password
+        if (!/(?=.*[A-Z])/.test(password)) {
+            setError('Please add at least one UPPERCASE')
+            return;
+        }
+        else if (!/(?=.*[0-9].*[0-9])/.test(password)) {
+            setError('Please add at least two digits')
+            return;
+        }
+        else if (password.length < 6) {
+            setError('Password must have 6 characters')
+            return;
+        }
+
+        // 4. create new user
         createUser(email, password)
             .then(result => {
                 const createdUser = result.user;
                 console.log(createdUser);
                 form.reset()
+                setSuccess('Register Success')
                 navigate('/category/0')
+                profileUpdate(createdUser, name, photo)
+
             })
 
             .catch(error => {
-                console.log(error.message)
+                setError(error.message)
             })
     }
 
-    const handleAccepted = event =>{
+    // profile updated
+    const profileUpdate = (user, name, photo) =>{
+        updateProfile(user, {
+            displayName: name,
+            photoURL: photo
+        })
+        .then(() => {
+            console.log('user name and photoURL updated')
+        })
+        .catch(error =>{
+            setError(error.message)
+        })
+    };
+
+
+    const handleAccepted = event => {
         setAccepted(event.target.checked)
 
     }
@@ -84,11 +125,11 @@ const Register = () => {
                 </Form.Text>
 
                 {/* for notification */}
-                <Form.Text className='text-success'>
-
+                <Form.Text className='text-success text-center'>
+                    <p>{success}</p>
                 </Form.Text>
-                <Form.Text className='text-danger'>
-
+                <Form.Text className='text-danger text-center'>
+                    <p>{error}</p>
                 </Form.Text>
             </Form>
         </Container>

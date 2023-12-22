@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 const LoginLayout = () => {
     return (
-        <div style={{backgroundColor: "#F3F3F3"}}>
+        <div style={{backgroundColor: "#F3F3F3",  }}>
             <NavigationBar></NavigationBar>
             <Outlet></Outlet>
         </div>

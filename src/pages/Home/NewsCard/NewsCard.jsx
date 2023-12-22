@@ -13,6 +13,7 @@ const NewsCard = ({ news }) => {
     return (
         <div>
             <Card className="mb-4">
+                
                 <Card.Header className='d-flex align-items-center'>
                     <Image style={{ height: 40 }} src={author?.img} roundedCircle />
 
@@ -25,8 +26,8 @@ const NewsCard = ({ news }) => {
                         <FaRegBookmark />
                         <FaShareAlt />
                     </div>
-
                 </Card.Header>
+
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
                     <Card.Img src={image_url} alt="Card image" />
@@ -39,6 +40,7 @@ const NewsCard = ({ news }) => {
                         }
                     </Card.Text>
                 </Card.Body>
+                
                 <Card.Footer className="text-muted d-flex">
                     <div className='flex-grow-1 d-flex align-items-center'>
                         <Rating
